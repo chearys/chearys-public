@@ -330,6 +330,13 @@ enableNoPre = false;
 
 //Kuudra/others
 @SwitchProperty({
+  name: "Kuudra Info",
+  description: "Shows player's stats when they join pf.",
+  category: "Kuudra",
+  subcategory: "Others"
+})
+kuudraInfo = false;
+@SwitchProperty({
   name: "Announce Fresh",
   description: "Says FRESH in p chat",
   category: "Kuudra",
