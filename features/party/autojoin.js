@@ -11,7 +11,8 @@ function joinParty(player) {
      
 }
 
-registerWhen(register("chat", (player) => {
+register("chat", (player) => {
+    if(!Settings.autoJoin) return;
 
     const whitelist = Settings.whitelist.split(",").map(entry => entry.trim().toLowerCase());
     const blacklist = Settings.blacklist.split(",").map(entry => entry.trim().toLowerCase());
@@ -39,7 +40,7 @@ registerWhen(register("chat", (player) => {
     joinParty(ign);
     return;
                 
-}).setCriteria("${*}&r${player} &r&ehas invited you to join${*}"), () => Settings.autoJoin);
+}).setCriteria("${*}&r${player} &r&ehas invited you to join${*}")
 
 
 

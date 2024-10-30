@@ -54,7 +54,8 @@ function resetConstants() {
 /**
  * Find pre spot
  */
-registerWhen(register("chat", () => {
+register("chat", () => {
+    if (Skyblock.subArea !== "Kuudra's Hollow") return;
     sleep(9000, () => {
         //sendDebugmsg("updating supplies");
         if (Player.asPlayerMP().distanceTo(-67.5, 77, -122.5) < 15) {
@@ -113,13 +114,15 @@ registerWhen(register("chat", () => {
             if (Settings.enableNoPre) ChatLib.say(`/pc No ${second}!`);
         }
     });
-}).setCriteria("[NPC] Elle: Okay adventurers, I will go and fish up Kuudra!"), () => Skyblock.subArea === "Kuudra's Hollow")
+}).setCriteria("[NPC] Elle: Okay adventurers, I will go and fish up Kuudra!")
 
-registerWhen(register("chat", (supply) => {
+register("chat", (supply) => {
+    if (Skyblock.subArea !== "Kuudra's Hollow") return;
     zzz.missing = supply;
-}).setCriteria("Party > ${*}: No ${supply}!"), () => Skyblock.subArea === "Kuudra's Hollow")
+}).setCriteria("Party > ${*}: No ${supply}!")
 
-registerWhen(register("step", () => {
+register("step", () => {
+    if (!Settings.enableNoSupply || Skyblock.subArea !== "Kuudra's Hollow") return;
     const piles = World.getAllEntitiesOfType(EntityArmorStand.class).filter(e =>
         e.getName().includes("SUPPLIES RECEIVED")
     );
@@ -132,7 +135,7 @@ registerWhen(register("step", () => {
             }
         });
     });
-}).setFps(2), () => Skyblock.subArea === "Kuudra's Hollow" && Settings.enableNoSupply)
+}).setFps(2)
 
 register("worldLoad", () => {
     resetConstants();

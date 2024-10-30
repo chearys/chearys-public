@@ -1,10 +1,4 @@
-/*
-register('command', () => {
-  sleep(1000, () => {
-    ChatLib.chat("Hello World");
-  });
-}).setName("examplecommand")
-*/
+
 
 export function sleep(timeout, codez) {
     let willFire = 0;

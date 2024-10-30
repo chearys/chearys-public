@@ -12,9 +12,9 @@ registerWhen(register("tick", () => {
   formatWaypoints();
 }), () => Settings.waypoint > 0)
 
-register("renderWorld", () => {
+registerWhen(register("renderWorld", () => {
     renderWaypoints();
-})
+}), () => formatted.length > 0 )
   
 register('worldUnload', () => {
     resetConstants();
@@ -70,6 +70,7 @@ function renderWaypoints() {
   }
 
 register("chat", (player, _ , x, y, z) => {
+  if (Settings.waypoint <= 0) return;
 
     // Gets colors and titles in name
     player = ChatLib.addColor(player.split("> ").slice(-1).toString());

@@ -290,7 +290,8 @@ function KuudraDown() {
 
 
 //Chat messages
-registerWhen(register("chat", (msg) => {
+register("chat", (msg) => {
+    if (!splitgui.displayKS || Skyblock.subArea !== "Kuudra's Hollow") return;
     switch (true) {
         case msg.includes("Okay adventurers, I will go and fish up Kuudra!"):
             RunStart();
@@ -320,7 +321,7 @@ registerWhen(register("chat", (msg) => {
             freshCount++;
             break;
     }
-}).setCriteria("${msg}"), () => splitgui.displayKS && Skyblock.subArea === "Kuudra's Hollow");
+}).setCriteria("${msg}")
 
 function updateTime() {
 
@@ -481,7 +482,8 @@ function formatFreshes() {
 }
 
 
-registerWhen(register("chat", (player, a , event) => {
+register("chat", (player, a , event) => {
+    if (Skyblock.subArea !== "Kuudra's Hollow") return;
     // Get color
     if(!a.toLowerCase().includes("fresh")) return;
     let name = ChatLib.getChatMessage(event);
@@ -490,11 +492,12 @@ registerWhen(register("chat", (player, a , event) => {
     //(`${name} freshed!`);
     freshes.push([Date.now(), name]);
 
-}).setCriteria("Party > ${player}: ${a}"), () => Skyblock.subArea === "Kuudra's Hollow")
+}).setCriteria("Party > ${player}: ${a}")
 
-registerWhen(register("chat", () => {
+register("chat", () => {
+    if (!Settings.annouceFresh || Skyblock.subArea !== "Kuudra's Hollow") return;
     ChatLib.command(`pc FRESH!`);
-}).setCriteria("Your Fresh Tools Perk bonus doubles your building speed for the next 10 seconds!"), () => Settings.annouceFresh && Skyblock.subArea === "Kuudra's Hollow")
+}).setCriteria("Your Fresh Tools Perk bonus doubles your building speed for the next 10 seconds!")
 
 register("chat", (supply, event) => {
     if(!Settings.customSupplyMessage) return;

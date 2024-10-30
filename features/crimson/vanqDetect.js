@@ -12,14 +12,15 @@ let vanquishers = [];
 let formatted = [];
 let messageSent = false;
 
-registerWhen(register("step", () => {
+register("step", () => {
+    if(!Settings.enableVanqESP || Skyblock.area !== "Crimson Isle") return;
     vanquishers = [];
     entities = World.getAllEntitiesOfType(EntityWither);
     vanquishers = entities.filter(entity => entity.getEntity().func_110138_aP() == 1024);
 
     detectVanquishers();
     formatWaypoints();
-}).setFps(10), () => Settings.enableVanqESP && Skyblock.area === "Crimson Isle");
+}).setFps(10)
 
 function detectVanquishers() {
     vanquishers = [];

@@ -7,7 +7,9 @@ import { registerWhen } from "../../utils/functions/reg";
 const t = ["joined the party.", "joined the dungeon group!", "joined the group!"];
 
 
-registerWhen(register("chat", (msg) => {
+register("chat", (msg) => {
+    if(!Settings.joinNotifs) return;
+
     if (msg.includes("Party >")) return;
 
     for (let trigger of t) {
@@ -17,6 +19,6 @@ registerWhen(register("chat", (msg) => {
         }
     }
 
-}).setChatCriteria("${msg}"), () => Settings.joinNotifs)
+}).setChatCriteria("${msg}")
 
 
