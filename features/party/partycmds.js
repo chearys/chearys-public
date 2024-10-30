@@ -94,9 +94,6 @@ const cmds = (command) => {
     ChatLib.command(command);
 }
 
-/**
- * who let me cook?
- */
 
 function randomPartyMember() {
     let members = Object.values(Party.members);
@@ -149,7 +146,8 @@ function trigger (player, command) {
  * Handler
  */
 
-registerWhen(register('chat', (player, args) => {
+register('chat', (player, args) => {
+    if(!Settings.enablePartyCommands) return;
   
     switch(args) {
 
@@ -325,9 +323,10 @@ registerWhen(register('chat', (player, args) => {
 
     
 }
-}).setCriteria("Party > ${player}: .${args}"), () => Settings.enablePartyCommands);
+}).setCriteria("Party > ${player}: .${args}")
 
-registerWhen(register('chat', (player, args) => {
+register('chat', (player, args) => {
+    if(!Settings.enablePartyCommands) return;
     switch(args) {
         case("warp"): {
             if (!isLeader()) return;
@@ -336,18 +335,19 @@ registerWhen(register('chat', (player, args) => {
                 break;
         }
     }
-}).setCriteria("Party > ${player}: !${args}"), () => Settings.enablePartyCommands);
+}).setCriteria("Party > ${player}: !${args}")
 
 /**
  * Not in party
  */
 
-registerWhen(register('chat', (ignToInv) => {
+register('chat', (ignToInv) => {
+    if(!Settings.enablePartyCommands) return;
     executeCommand('inv', () => {
         //sendDebugmsg(`inviting ${ignToInv}!`);
         cmds(`party invite ${ignToInv}`);
     });
-}).setCriteria(/From (?:\[[^\]]+\] )?(\w+)(?: [ቾ⚒])?: ?\.(party|p|inv|invite)/), () => Settings.enablePartyCommands);
+}).setCriteria(/From (?:\[[^\]]+\] )?(\w+)(?: [ቾ⚒])?: ?\.(party|p|inv|invite)/)
 
 
 /**
@@ -368,21 +368,23 @@ register('worldLoad', () => {
 	prevTime = null;
 })
 
-registerWhen(register('chat', (player) => {
+register('chat', (player) => {
+    if(!Settings.enablePartyCommands) return;
     executeCommand('ping', () => {
         //sendDebugmsg(`ping requested by ${player}`);
         Client.sendPacket(new C16PacketClientStatus(C16PacketClientStatus.EnumState.REQUEST_STATS));
 	    lastPingAt = System.nanoTime();
 	    requestedPing = true;
     });
-}).setCriteria("Party > ${player}: .ping"), () => Settings.enablePartyCommands);
+}).setCriteria("Party > ${player}: .ping")
 
-registerWhen(register('chat', (player) => {
+register('chat', (player) => {
+    if(!Settings.enablePartyCommands) return;
     executeCommand('tps', () => {
         //sendDebugmsg(`tps requested by ${player}`);
         requestedTPS = true;
     });
-}).setCriteria("Party > ${player}: .tps"), () => Settings.enablePartyCommands);
+}).setCriteria("Party > ${player}: .tps")
 
 
 register('packetReceived', (packet) => {
