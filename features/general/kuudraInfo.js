@@ -1,6 +1,7 @@
 import Settings from "../../config";
 import { sendDebugmsg } from "../../utils/functions/debug";
 import { request }from "../../../requestV2";
+import { derank } from '../../utils/functions/derank';
 import axios from "axios";
 
 register("command", (meow) => {
