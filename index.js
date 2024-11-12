@@ -48,8 +48,8 @@ const loadModules = () => {
 
     //harddebug(`All features loaded, total loading time: ${total}ms`);
     
-    sendmsg("For faster update, visit https://github.com/chearys/chearys");
-    sendmsg("/chearys <- gui || Love all of you special people &c<3!");
+    sendmsg("For faster update, visit https://github.com/chearys/chearys-public");
+    sendmsg("/chearys <- gui || Love all of you &c<3!");
 };
 
 loadModules();

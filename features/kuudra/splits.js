@@ -57,7 +57,8 @@ export function getPhase() {
 }
 
 export function getKillTime() {
-    return times[6];
+    const lagCompensation = Math.max((packetCount - tickCount) / 20, 0);
+    return (parseFloat(times[6]) + lagCompensation).toFixed(2);
 }
 
 function returnColor(input) {

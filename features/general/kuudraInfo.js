@@ -54,6 +54,9 @@ function trigger(c) {
     const MPMessage = new TextComponent(`&cMana Pool Level&f: ${c.kuudraStats.MPlevel}`)
     .setHoverValue((`${c.hoverableMessage.stats.MP}`) || "No lore found");
 
+    const kickMessage = new TextComponent(`\n&cRemove &4${c.ign} &cfrom the party`)
+        .setClick("run_command", `/p kick ${derank(c.ign)}`);
+
     ChatLib.chat(`&4[chearys] &8[${c.level}&8] ${c.rank} ${c.ign}'s &cKuudra stats:`);
     ChatLib.chat("");  
     ChatLib.chat(kuudraLevelMessage);
@@ -72,6 +75,7 @@ function trigger(c) {
     ChatLib.chat(ChestplateMessage);
     ChatLib.chat(LeggingsMessage);
     ChatLib.chat(BootsMessage);
+    ChatLib.chat(kickMessage);
 }
 
 
