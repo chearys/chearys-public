@@ -41,6 +41,13 @@ https://github.com/user-attachments/assets/f2402db4-9fc6-46b6-a940-6eaafd40487b
 - Use `/chearys` to open the configuration or the GUI.
 - Explore various settings and customizations to enhance your gameplay experience.
 
+## Contacts and Closing
+- Official Community Discord: (https://discord.gg/4VKqJhKvUQ)
+- Discord: `@kwuromi. (ID: 413811664245227520)`
+- Discord: `@chearys. (ID: 494104713797828608)`
+
+We would like to give a special thanks to Sophie for helping beta test the module constantly along with our other original beta access group.
+
 ## License
 
 This project is licensed under the MIT License.
