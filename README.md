@@ -3,6 +3,9 @@
 **Chearys** is a ChatTriggers module for Hypixel Skyblock, designed to be lightweight and customizable. It offers a variety of features, with a focus on Kuudra.
 
 If you have any questions or encounter any problems, feel free to contact **@chearys.** on discord or join https://discord.gg/4VKqJhKvUQ.
+[ChatTriggers Website](https://www.chattriggers.com/modules/v/chearys) and [Github Website](https://github.com/chearys/chearys-public) are the only official places to download chearys from. 
+
+This mod was created by @kwuromi. and @chearys. and can be contacted through discord via this [discord server](https://discord.gg/4VKqJhKvUQ).
 
 ## Features
 
