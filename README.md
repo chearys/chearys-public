@@ -41,11 +41,6 @@ https://github.com/user-attachments/assets/f2402db4-9fc6-46b6-a940-6eaafd40487b
 - Use `/chearys` to open the configuration or the GUI.
 - Explore various settings and customizations to enhance your gameplay experience.
 
-## Special Thanks
-
-Special thanks to Sophie for testing and providing feedback!
-A special thanks to [NwjnAddons](https://github.com/nwjn/NwjnAddons) for providing some of the base code.
-
 ## License
 
 This project is licensed under the MIT License.
