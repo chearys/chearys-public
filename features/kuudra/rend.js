@@ -71,8 +71,8 @@ registerWhen(register("renderOverlay", render), () => Settings.backBone && getPh
 /**
  * Rend damage tracker thingy
  * - Calculated in 1000.
- * - Full health: 12,000 (300M)
- * - Threshold: 1666 (20M)
+ * - Full health: 12,000 (300M) - New 9,600 (240M)
+ * - Threshold: 1666 (20M) - New 2083 (20M)
  */
 
 let health = 24999;
@@ -80,9 +80,9 @@ let health = 24999;
 
 
 function formatDamage(i) {
-    if ( i >= 1666 && i <= 3333) return `&c`; // 20M-40M
-    if ( i >= 3333 && i <= 6666) return `&e`; // 40M-80M
-    if ( i > 6666 ) return `&a`; //80M+
+    if ( i >= 2083 && i <= 4166) return `&c`; // 20M-40M
+    if ( i >= 4166 && i <= 7291) return `&e`; // 40M-70M
+    if ( i > 7291 ) return `&a`; //70M+
     return `&f`;
 }
 
@@ -97,9 +97,9 @@ registerWhen(register('packetReceived', () => {
 
     let diff = health - getKuudraHP();
 
-    if(diff > 1666) {
-        sendmsg(`Pull at ${formatTime(getKillTime())}${formatTimeMs(getKillTime())} for ${formatDamage(diff)}${formatHealth(diff*12000)}`);
-        //sendmsg(`Someone pulled for ${formatColor(i)}${formatHealth(diff*12000)}`);
+    if(diff > 2083) {
+        sendmsg(`Pull at ${formatTime(getKillTime())}${formatTimeMs(getKillTime())} for ${formatDamage(diff)}${formatHealth(diff*9600)}`);
+        //sendmsg(`Someone pulled for ${formatColor(i)}${formatHealth(diff*9600)}`);
         health = getKuudraHP();
         return;
     }
