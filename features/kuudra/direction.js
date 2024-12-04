@@ -41,11 +41,11 @@ registerWhen(register("tick", () => {
                 percentHP = new Text(`${color}${percent}%`, Renderer.screen.getWidth() / 2 - Renderer.getStringWidth(percent) / 2, 10);
             }
             else if (phase === 7 || phase === 8) {
-                const realHP = currentHP * 12000;
-                percent = (realHP / 300_000_000 * 100).toFixed(2);
+                const realHP = currentHP * 9600;
+                percent = (realHP / 240_000_000 * 100).toFixed(2);
                 color = getPercentColor(percent);
 
-                HPDisplay = [`${color + formatHealth(realHP.toFixed(2))}§7/§a300M §c❤`, kuudra.getX(), kuudra.getY(), kuudra.getZ()];
+                HPDisplay = [`${color + formatHealth(realHP.toFixed(2))}§7/§a240M §c❤`, kuudra.getX(), kuudra.getY(), kuudra.getZ()];
                 percentHP = new Text(`${color}${percent}%`, Renderer.screen.getWidth() / 2 - Renderer.getStringWidth(percent) / 2, 10);
             }
         }
