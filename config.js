@@ -368,7 +368,7 @@ pearlAmount = "";
 //Kuudra/Rend
 @SwitchProperty({
   name: "Backbone tracker",
-  description: "Plays a sound when your backbone hits",
+  description: "Plays a sound when your backbone hits| &cRequires /ChearysSplits",
   category: 'Kuudra',
   subcategory: 'Rend',
 })
@@ -376,7 +376,7 @@ backBone = false;
 //Kuudra/Rend
 @TextProperty({
   name: "Backbone tracker Sound",
-  description: "e.g random.anvil_land you can search /playSound 1.8.9 for it",
+  description: "e.g random.anvil_land you can search /playSound 1.8.9 for it| &cRequires /ChearysSplits",
   category: 'Kuudra',
   subcategory: 'Rend',
   placeholder: '',
@@ -385,7 +385,7 @@ backBoneSound = "mob.cat.meow"
 //Kuudra/Rend
 @SwitchProperty({
   name: "Pull tracker",
-  description: "Calculates your party's rend damage",
+  description: "Calculates your party's rend damage| &cRequires /ChearysSplits & KuudraHP",
   category: 'Kuudra',
   subcategory: 'Rend',
 })
