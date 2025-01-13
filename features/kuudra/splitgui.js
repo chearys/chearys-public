@@ -47,6 +47,12 @@ import {
   })
   displayKS = false;
   @SwitchProperty({
+    name: "Less Detailed Splits",
+    description: "Less detailed kuudra splits",
+    category: "General",
+  })
+  NoDetail = false;
+  @SwitchProperty({
     name: "Run overview",
     description: "Detailed splits at the end of the run",
     category: "General",

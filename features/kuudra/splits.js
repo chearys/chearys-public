@@ -190,32 +190,41 @@ register("renderOverlay", () => {
         let pos = [data.splitscoords.x, data.splitscoords.y];
 
         // Renders
-        let t = 0;
-        for (let k in example) {
-            Renderer.drawStringWithShadow(example[k], pos[0] + xOffset, pos[1] + (t * yOffset * scale));
-            t++;
+        if (!splitgui.NoDetail) {
+            let t = 0;
+            for (let k in example) {
+                Renderer.drawStringWithShadow(example[k], pos[0] + xOffset, pos[1] + (t * yOffset * scale));
+                t++;
+            }
+        } else {
+            let exampleNoDetail = {
+                a: `${returnColor(splitgui.supplyColor)}Supplies: &f0s`,
+                b: `${returnColor(splitgui.buildColor)}Build: &f0s`,
+                c: `${returnColor(splitgui.stunColor)}Stun: &f0s`,
+                d: `${returnColor(splitgui.P4Color)}Kuudra: &f0s`
+            };
+            let t = 0;
+            for (let k in exampleNoDetail) {
+                Renderer.drawStringWithShadow(exampleNoDetail[k], pos[0] + xOffset, pos[1] + (t * yOffset * scale));
+                t++;
+            }
         }
     } else return  renderingExampleOverlay=false;
-
-    // Uncomment the following if needed
-    // if (Settings.FreshGUI.isOpen()) {
-    //     freshPos = [data.freshcoords.x, data.freshcoords.y];
-    //     Renderer.drawStringWithShadow(`${freshColor}${BOLD}FRESHES: 0`, freshPos[0], freshPos[1] - 10);
-    // }
-    // if (Settings.SuppliesGUI.isOpen()) {
-    //     supplyPos = [data.suppliescoords.x, data.suppliescoords.y];
-    //     Renderer.drawStringWithShadow(`${GOLD}${BOLD}Supplies: 0/6`, supplyPos[0], supplyPos[1] - 10);
-    // }
 });
 
+
 let renderingExampleOverlay = false;
+let b_x = 83;
+let b_y = 47;
 
 register("worldLoad", () => {
     resetConstants();
 })
 
 register("step", () => {
-    if (!Skyblock.subArea === "Kuudra's Hollow") return;
+    if (Skyblock.subArea !== "Kuudra's Hollow") return;
+    if (splitgui.NoDetail) return b_y = 47;
+    b_y = 88
     resetColor();
 }).setFps(1)
 
@@ -408,16 +417,27 @@ function updateTime() {
     ).toFixed(2);
     
     if (phase > 0) {
-        lines = {
-            a: new Text(`${colors[0]}Supplies: ${getColorCode(times[0], 0)}${formatTimeMs(times[0])}`, pos[0] + 5, pos[1] + 5 * scale),
-            b: new Text(`${colors[1]}Build: ${getColorCode(times[1], 1)}${formatTimeMs(times[1])}`, pos[0] + 5, pos[1] + 15 * scale),
-            c: new Text(`${colors[2]}Eaten: ${getColorCode(times[2], 2)}${formatTimeMs(times[2])}`, pos[0] + 5, pos[1] + 25 * scale),
-            d: new Text(`${colors[3]}Stun: ${getColorCode(times[3], 3)}${formatTimeMs(times[3])}`, pos[0] + 5, pos[1] + 35 * scale),
-            e: new Text(`${colors[4]}DPS: ${getColorCode(times[4], 4)}${formatTimeMs(times[4])}`, pos[0] + 5, pos[1] + 45 * scale),
-            f: new Text(`${colors[5]}Skip: ${getColorCode(times[5], 5)}${formatTimeMs(times[5])}`, pos[0] + 5, pos[1] + 55 * scale),
-            g: new Text(`${colors[6]}Kuudra: ${getColorCode(times[6], 6)}${formatTimeMs(times[6])}`, pos[0] + 5, pos[1] + 65 * scale),
-            h: new Text(`${colors[7]}Overall: &f${formatTime(overall)}`, pos[0] + 5, pos[1] + 75 * scale)
-        };
+        if (!splitgui.NoDetail) {
+            lines = {
+                a: new Text(`${colors[0]}Supplies: ${getColorCode(times[0], 0)}${formatTimeMs(times[0])}`, pos[0] + 5, pos[1] + 5 * scale),
+                b: new Text(`${colors[1]}Build: ${getColorCode(times[1], 1)}${formatTimeMs(times[1])}`, pos[0] + 5, pos[1] + 15 * scale),
+                c: new Text(`${colors[2]}Eaten: ${getColorCode(times[2], 2)}${formatTimeMs(times[2])}`, pos[0] + 5, pos[1] + 25 * scale),
+                d: new Text(`${colors[3]}Stun: ${getColorCode(times[3], 3)}${formatTimeMs(times[3])}`, pos[0] + 5, pos[1] + 35 * scale),
+                e: new Text(`${colors[4]}DPS: ${getColorCode(times[4], 4)}${formatTimeMs(times[4])}`, pos[0] + 5, pos[1] + 45 * scale),
+                f: new Text(`${colors[5]}Skip: ${getColorCode(times[5], 5)}${formatTimeMs(times[5])}`, pos[0] + 5, pos[1] + 55 * scale),
+                g: new Text(`${colors[6]}Kuudra: ${getColorCode(times[6], 6)}${formatTimeMs(times[6])}`, pos[0] + 5, pos[1] + 65 * scale),
+                h: new Text(`${colors[7]}Overall: &f${formatTime(overall)}`, pos[0] + 5, pos[1] + 75 * scale)
+            };
+        } else {
+            let stun = (parseFloat(times[2]) + parseFloat(times[3]) + parseFloat(times[4])).toFixed(2);
+            let kuudra = (parseFloat(times[5]) + parseFloat(times[6])).toFixed(2);
+            lines = {
+                a: new Text(`${colors[0]}Supplies: ${getColorCode(times[0], 0)}${formatTimeMs(times[0])}`, pos[0] + 5, pos[1] + 5 * scale),
+                b: new Text(`${colors[1]}Build: ${getColorCode(times[1], 1)}${formatTimeMs(times[1])}`, pos[0] + 5, pos[1] + 15 * scale),
+                c: new Text(`${colors[3]}Stun: &f${formatTimeMs(stun)}`, pos[0] + 5, pos[1] + 25 * scale),
+                d: new Text(`${colors[6]}Kuudra: &f${formatTimeMs(kuudra)}`, pos[0] + 5, pos[1] + 35 * scale)
+            };
+        }
     }
     
 
@@ -434,8 +454,6 @@ registerWhen(register("step", () => {
 }).setFps(21), () =>  Skyblock.subArea === "Kuudra's Hollow")
 
 
-let b_x = 83;
-let b_y = 88;
 
 function render() {
 
