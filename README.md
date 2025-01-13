@@ -17,7 +17,7 @@ This mod was created by @kwuromi. and @chearys. and can be contacted through dis
   ![Rend Calculator](https://i.imgur.com/b3AJdhr.png)
 
 - **Custom Kuudra Splits**:  
-  Fully customizable Kuudra splits based on your preferences.  
+  Fully customizable and accurate Kuudra splits based on your preferences. 
   - **During the run**:  
     ![Custom Kuudra Splits (During Run)](https://i.imgur.com/7XehIkn.png)
   - **After the run (detailed split)**:  
@@ -41,12 +41,18 @@ https://github.com/user-attachments/assets/f2402db4-9fc6-46b6-a940-6eaafd40487b
 - Use `/chearys` to open the configuration or the GUI.
 - Explore various settings and customizations to enhance your gameplay experience.
 
+## Credits
+We would like to give a special thanks to Sophie for helping beta test the module constantly along with our other original beta access group.
+Thank you to [NWJN Addons](https://github.com/nwjn/NwjnAddons) for providing some base codes.
+
 ## Contacts and Closing
+We are the official creator of all the modules above and there will be no other safe place to download it except here. We are also the original coders of a majority of this code so if you see it elsewhere just know its ours :).
+To stay updated please join our OFFICIAL COMMUNITY DISCORD below for support and faster updates.
 - Official Community Discord: (https://discord.gg/4VKqJhKvUQ)
 - Discord: `@kwuromi. (ID: 413811664245227520)`
 - Discord: `@chearys. (ID: 494104713797828608)`
 
-We would like to give a special thanks to Sophie for helping beta test the module constantly along with our other original beta access group.
+
 
 ## License
 
