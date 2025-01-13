@@ -46,6 +46,12 @@ import {
     category: "General",
   })
   displayKS = false;
+  @SwitchProperty({
+    name: "Run overview",
+    description: "Detailed splits at the end of the run",
+    category: "General",
+  })
+  enableRunOverview = false;
   @PercentSliderProperty({
     name: 'Overlay Opacity',
     description: 'Kuudra Splits overlay opacity',

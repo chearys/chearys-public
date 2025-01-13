@@ -5,7 +5,6 @@ import { formatTime } from "../../utils/functions/time";
 import { formatTimeMs } from "../../utils/functions/time";
 import { registerWhen } from "../../utils/functions/reg";
 import Skyblock from "../../../BloomCore/Skyblock";
-import Party from '../../../BloomCore/Party';
 import splitgui from '../kuudra/splitgui';
 import { data } from "../../utils/data/data";
 
@@ -215,9 +214,10 @@ register("worldLoad", () => {
     resetConstants();
 })
 
-registerWhen(register("step", () => {
+register("step", () => {
+    if (!Skyblock.subArea === "Kuudra's Hollow") return;
     resetColor();
-}).setFps(1), () => splitgui.displayKS && Skyblock.subArea === "Kuudra's Hollow")
+}).setFps(1)
 
 //Phase 1: on run start
 function RunStart() {
@@ -268,6 +268,7 @@ function KuudraDown() {
     splits[7] = Date.now() / 1000;
     phase = 8;
         sleep(500, () => {
+            if (!splitgui.enableRunOverview) return;
             ChatLib.chat("  &4[chearys] Splits");
             ChatLib.chat(`${colors[0]}Supplies: ${getColorCode(times[0], 0)}${formatTimeMs(times[0])}`);
             ChatLib.chat(`${colors[1]}Build time: ${getColorCode(times[1], 1)}${formatTimeMs(times[1])}`);
@@ -292,7 +293,7 @@ function KuudraDown() {
 
 //Chat messages
 register("chat", (msg) => {
-    if (!splitgui.displayKS || Skyblock.subArea !== "Kuudra's Hollow") return;
+    if (Skyblock.subArea !== "Kuudra's Hollow") return;
     switch (true) {
         case msg.includes("Okay adventurers, I will go and fish up Kuudra!"):
             RunStart();
@@ -426,18 +427,17 @@ function updatePosition() {
 }
 
 
-//Calculating times and lines display!
-register("step", () => {
+registerWhen(register("step", () => {
     updateTime();
-    updatePosition();
-}).setFps(21)//, () => splitgui.displayKS && Skyblock.subArea === "Kuudra's Hollow")
+
+    if (splitgui.displayKS) return  updatePosition();
+}).setFps(21), () =>  Skyblock.subArea === "Kuudra's Hollow")
 
 
 let b_x = 83;
 let b_y = 88;
 
 function render() {
-    if (!splitgui.displayKS || renderingExampleOverlay == true) return;
 
     switch (true) {
         case (times[0] > 10 && times[0] < 60):
@@ -461,7 +461,7 @@ function render() {
 
 }
 
-registerWhen(register('renderOverlay', render), () => splitgui.displayKS && Skyblock.subArea === "Kuudra's Hollow" && phase > 0)
+registerWhen(register('renderOverlay', render), () => splitgui.displayKS && Skyblock.subArea === "Kuudra's Hollow" && phase > 0 && !renderingExampleOverlay)
 
 
 /**
