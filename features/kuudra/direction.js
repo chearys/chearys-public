@@ -20,7 +20,6 @@ function getPercentColor(percent) {
     else return "§c"; // Red (20%-0%)
 }
 
-// Kuudra HP logic at 100 FPS
 registerWhen(register("step", () => {
     cubes = World.getAllEntitiesOfType(EntityMagmaCube.class);
 
@@ -32,7 +31,7 @@ registerWhen(register("step", () => {
         currentHP = 100_000;
         HPDisplay = ["100k/100k ❤", 0, 0, 0];
     }
-}).setFps(100), () => Skyblock.subArea === "Kuudra's Hollow");
+}).setFps(50), () => Skyblock.subArea === "Kuudra's Hollow");
 
 registerWhen(register("tick", () => {
     if (Settings.enableKuudraHP) {

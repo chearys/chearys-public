@@ -69,7 +69,7 @@ import {
     description: 'The scale of the overlay',
     category: 'General',
   })
-  KSscale = 1.0;
+  KSscale = 0.5;
   @PercentSliderProperty({
     name: 'X Location',
     description: 'Where in the X coordinate is the overlay drawn',

@@ -15,7 +15,7 @@ let lines = {};
 let overall = 0;
 let splits6Set = false;
 let freshCount = 0;
-let scale = splitgui.KSscale;
+let scale = 1.0;
 let colors = [];
 
 
@@ -183,9 +183,8 @@ const example = {
     h: `${returnColor(splitgui.overallColor)}Overall: &f0s`
 };
 
-register("renderOverlay", () => {
-    if (splitgui.SplitsGUI.isOpen()) {
-        renderingExampleOverlay=true;
+registerWhen(register("renderOverlay", () => {
+
         resetColor();
         let pos = [data.splitscoords.x, data.splitscoords.y];
 
@@ -209,8 +208,8 @@ register("renderOverlay", () => {
                 t++;
             }
         }
-    } else return  renderingExampleOverlay=false;
-});
+
+}), () => splitgui.SplitsGUI.isOpen())
 
 
 let renderingExampleOverlay = false;
@@ -224,6 +223,14 @@ register("worldLoad", () => {
 register("step", () => {
     if (Skyblock.subArea !== "Kuudra's Hollow") return;
     if (splitgui.NoDetail) return b_y = 47;
+    if (splitgui.SplitsGUI.isOpen()) {
+        renderingExampleOverlay = true;
+    } else {
+        renderingExampleOverlay = false;
+    }
+
+    scale = splitgui.KSscale * 2;
+
     b_y = 88
     resetColor();
 }).setFps(1)
