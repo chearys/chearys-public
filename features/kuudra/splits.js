@@ -15,7 +15,7 @@ let lines = {};
 let overall = 0;
 let splits6Set = false;
 let freshCount = 0;
-let scale = 1.0;
+let scale = parseFloat(splitgui.KSscale) * 2;
 let colors = [];
 
 
@@ -101,13 +101,16 @@ function getColorCode(time, arrayIndex) {
     }
 
     const colorMapping = {
-        0: [29.5, 31, 35],
-        1: [16, 18, 23],
-        2: [5.4, 5.7, 6.2],
-        3: [1.2, 1.5, 2],
-        4: [2.8, 3.5, 4.5],
-        5: [4, 4.5, 5],
-        6: [1.5, 2, 2.5]
+        0: [30, 32, 35], // Supply
+        1: [17, 20, 23], // Build
+        2: [5.5, 6.2, 6.6], // Eaten
+        3: [0.2, 0.5, 1], // Stun
+        4: [4.2, 4.7, 5.5], // DPS
+        5: [4, 4.5, 5], // Skip
+        6: [2.2, 2.5, 3], // Kuudra
+        7: [67, 72, 80], // Overall
+        8: [10, 11.5, 13 ], // Less detailed splits (Stun)
+        9: [6.2, 7, 8] // Less detailed splits (P4)
     };
 
     if (!colorMapping[arrayIndex]) {
@@ -229,16 +232,17 @@ register("step", () => {
         renderingExampleOverlay = false;
     }
 
-    scale = splitgui.KSscale * 2;
+    scale = parseFloat(splitgui.KSscale) * 2;
 
     b_y = 88
-    resetColor();
+    //resetColor();
 }).setFps(1)
 
 //Phase 1: on run start
 function RunStart() {
     resetConstants();
     registerListener();
+    //resetColor();
     //sendDebugmsg("Run started");
     splits[0] = Date.now() / 1000;
     phase = 1;
@@ -342,6 +346,7 @@ register("chat", (msg) => {
 }).setCriteria("${msg}")
 
 function updateTime() {
+    resetColor();
 
     let lagCompensation = Math.max((packetCount - tickCount) / 20, 0);
 
@@ -433,7 +438,7 @@ function updateTime() {
                 e: new Text(`${colors[4]}DPS: ${getColorCode(times[4], 4)}${formatTimeMs(times[4])}`, pos[0] + 5, pos[1] + 45 * scale),
                 f: new Text(`${colors[5]}Skip: ${getColorCode(times[5], 5)}${formatTimeMs(times[5])}`, pos[0] + 5, pos[1] + 55 * scale),
                 g: new Text(`${colors[6]}Kuudra: ${getColorCode(times[6], 6)}${formatTimeMs(times[6])}`, pos[0] + 5, pos[1] + 65 * scale),
-                h: new Text(`${colors[7]}Overall: &f${formatTime(overall)}`, pos[0] + 5, pos[1] + 75 * scale)
+                h: new Text(`${colors[7]}Overall: ${getColorCode(times[7], 7)}${formatTime(overall)}`, pos[0] + 5, pos[1] + 75 * scale)
             };
         } else {
             let stun = (parseFloat(times[2]) + parseFloat(times[3]) + parseFloat(times[4])).toFixed(2);
@@ -441,8 +446,8 @@ function updateTime() {
             lines = {
                 a: new Text(`${colors[0]}Supplies: ${getColorCode(times[0], 0)}${formatTimeMs(times[0])}`, pos[0] + 5, pos[1] + 5 * scale),
                 b: new Text(`${colors[1]}Build: ${getColorCode(times[1], 1)}${formatTimeMs(times[1])}`, pos[0] + 5, pos[1] + 15 * scale),
-                c: new Text(`${colors[3]}Stun: &f${formatTimeMs(stun)}`, pos[0] + 5, pos[1] + 25 * scale),
-                d: new Text(`${colors[6]}Kuudra: &f${formatTimeMs(kuudra)}`, pos[0] + 5, pos[1] + 35 * scale)
+                c: new Text(`${colors[3]}Stun: ${getColorCode(stun, 8)}${formatTimeMs(stun)}`, pos[0] + 5, pos[1] + 25 * scale),
+                d: new Text(`${colors[6]}Kuudra: ${getColorCode(kuudra, 9)}${formatTimeMs(kuudra)}`, pos[0] + 5, pos[1] + 35 * scale)
             };
         }
     }
